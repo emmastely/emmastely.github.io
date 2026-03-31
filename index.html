@@ -8,24 +8,24 @@
 <style>
     body {
         margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #1a1a2e;
-        color: #eaeaea;
+        font-family: "Times New Roman", Georgia, serif;
+        background-color: #f6f1e9;
+        color: #1a1a1a;
         scroll-behavior: smooth;
     }
 
-    /* NAVBAR (hidden at start) */
+    /* NAVBAR */
     .navbar {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        padding: 15px 30px;
-        background: rgba(26, 26, 46, 0.9);
-        backdrop-filter: blur(10px);
-        color: #16c79a;
-        font-weight: bold;
-        letter-spacing: 1px;
+        padding: 18px 40px;
+        background: rgba(246, 241, 233, 0.9);
+        backdrop-filter: blur(6px);
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        font-size: 1.1rem;
+        letter-spacing: 0.05em;
         transform: translateY(-100%);
         transition: transform 0.4s ease;
         z-index: 1000;
@@ -41,79 +41,70 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        position: relative;
-        background: radial-gradient(circle at center, #16213e 0%, #1a1a2e 80%);
-        overflow: hidden;
+        background: #f6f1e9;
+        text-align: center;
     }
 
     .hero-content {
-        text-align: center;
         transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
+    /* BIG EDITORIAL TEXT */
     .giant-text {
         margin: 0;
-        line-height: 0.85;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        line-height: 0.9;
     }
 
     .giant-text span {
-        font-size: clamp(4rem, 18vw, 18rem);
-        font-weight: 900;
-        color: #16c79a;
-        text-transform: uppercase;
-        letter-spacing: -0.05em;
-        text-shadow: 0 0 25px rgba(22, 199, 154, 0.35);
+        display: block;
+        font-size: clamp(4rem, 16vw, 14rem);
+        font-weight: 500;
+        letter-spacing: -0.02em;
     }
 
     .hero p {
-        margin-top: 20px;
-        font-size: 1.2rem;
-        color: #cfcfcf;
+        margin-top: 25px;
+        font-size: 1.1rem;
+        color: #555;
+        font-style: italic;
     }
 
     /* PROJECTS */
     .projects {
         padding: 80px 20px;
-        max-width: 1100px;
+        max-width: 900px;
         margin: auto;
     }
 
     .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 20px;
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
 
     .btn-card {
         display: block;
-        padding: 25px;
-        border-radius: 12px;
-        text-align: center;
+        padding: 20px 0;
         text-decoration: none;
-        background: #16213e;
-        color: #eaeaea;
-        border: 1px solid rgba(255,255,255,0.05);
-        transition: all 0.3s ease;
+        color: inherit;
+        border-bottom: 1px solid rgba(0,0,0,0.15);
+        transition: all 0.2s ease;
     }
 
     .btn-card:hover {
-        transform: translateY(-8px) scale(1.02);
-        border-color: #16c79a;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        color: #16c79a;
+        padding-left: 10px;
     }
 
     .btn-card h3 {
-        margin: 0 0 10px;
-        color: #16c79a;
+        margin: 0;
+        font-size: 1.4rem;
+        font-weight: normal;
     }
 
     .btn-card p {
-        font-size: 0.9rem;
-        color: #cfcfcf;
+        margin: 5px 0 0;
+        font-size: 0.95rem;
+        color: #666;
     }
 </style>
 </head>
@@ -140,22 +131,27 @@
 <!-- PROJECTS -->
 <section class="projects">
     <div class="grid">
+
         <a href="#" class="btn-card">
-            <h3>Trends</h3>
-            <p>20 years of crime evolution</p>
+            <h3>Trends Over Time</h3>
+            <p>Two decades of crime evolution across the city</p>
         </a>
+
         <a href="#" class="btn-card">
-            <h3>Map</h3>
-            <p>Crime hotspots</p>
+            <h3>Geographic Patterns</h3>
+            <p>Where crime concentrates across neighborhoods</p>
         </a>
+
         <a href="#" class="btn-card">
             <h3>Seasonality</h3>
-            <p>Monthly patterns</p>
+            <p>How crime fluctuates over months and years</p>
         </a>
+
         <a href="#" class="btn-card">
-            <h3>Arrests</h3>
-            <p>Rates and insights</p>
+            <h3>Arrest Analysis</h3>
+            <p>Understanding enforcement and outcomes</p>
         </a>
+
     </div>
 </section>
 
@@ -168,13 +164,11 @@
         const scrollY = window.scrollY;
         const height = hero.offsetHeight;
 
-        // Scale down + fade hero text
         let progress = Math.min(scrollY / height, 1);
 
-        heroContent.style.transform = `scale(${1 - progress * 0.5}) translateY(-${progress * 100}px)`;
-        heroContent.style.opacity = 1 - progress * 0.8;
+        heroContent.style.transform = `scale(${1 - progress * 0.4}) translateY(-${progress * 80}px)`;
+        heroContent.style.opacity = 1 - progress * 0.7;
 
-        // Show navbar after scrolling
         if (scrollY > height * 0.6) {
             navbar.classList.add("show");
         } else {
