@@ -3,179 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crime Patterns in San Francisco</title>
+<title>Crime in SF</title>
 
 <style>
     body {
         margin: 0;
-        font-family: "Times New Roman", Georgia, serif;
-        background-color: #f6f1e9;
+        background-color: #f2cc60;
+        font-family: "Arial Black", Impact, sans-serif;
         color: #1a1a1a;
-        scroll-behavior: smooth;
-    }
-
-    /* NAVBAR */
-    .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 18px 40px;
-        background: rgba(246, 241, 233, 0.9);
-        backdrop-filter: blur(6px);
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-        font-size: 1.1rem;
-        letter-spacing: 0.05em;
-        transform: translateY(-100%);
-        transition: transform 0.4s ease;
-        z-index: 1000;
-    }
-
-    .navbar.show {
-        transform: translateY(0);
-    }
-
-    /* HERO */
-    .hero {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #d2ba94;
         text-align: center;
     }
 
-    .hero-content {
-        transition: transform 0.3s ease, opacity 0.3s ease;
+    /* HERO SECTION */
+    .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
     }
 
-    /* BIG EDITORIAL TEXT */
-    .giant-text {
-        margin: 0;
+    /* BIG STACKED TITLE */
+    .title {
         line-height: 0.9;
     }
 
-    .giant-text span {
+    .title span {
         display: block;
-        font-size: clamp(4rem, 16vw, 14rem);
-        font-weight: 500;
-        letter-spacing: -0.02em;
+        font-size: clamp(4rem, 14vw, 10rem);
+        color: #7fa8c9;
+        -webkit-text-stroke: 3px #1a1a1a;
+        text-shadow: 6px 6px 0px #5f8fb5;
     }
 
-    .hero p {
-        margin-top: 25px;
-        font-size: 1.1rem;
-        color: #555;
-        font-style: italic;
-    }
-
-    /* PROJECTS */
-    .projects {
-        padding: 80px 20px;
-        max-width: 900px;
-        margin: auto;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .btn-card {
-        display: block;
-        padding: 20px 0;
-        text-decoration: none;
-        color: inherit;
-        border-bottom: 1px solid rgba(0,0,0,0.15);
-        transition: all 0.2s ease;
-    }
-
-    .btn-card:hover {
-        padding-left: 10px;
-    }
-
-    .btn-card h3 {
-        margin: 0;
+    /* SUBHEADER */
+    .subtitle {
+        margin-top: 40px;
+        font-family: Arial, sans-serif;
         font-size: 1.4rem;
-        font-weight: normal;
+        max-width: 800px;
+        line-height: 1.5;
     }
 
-    .btn-card p {
-        margin: 5px 0 0;
-        font-size: 0.95rem;
-        color: #666;
+    /* OPTIONAL: slight hover bounce for fun */
+    .title span:hover {
+        transform: translateY(-5px);
+        transition: transform 0.2s ease;
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+        .subtitle {
+            font-size: 1.1rem;
+        }
     }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar" id="navbar">
-    Crime In SF
-</div>
-
-<!-- HERO -->
 <section class="hero">
-    <div class="hero-content" id="heroContent">
-        <h1 class="giant-text">
-            <span>Crime</span>
-            <span>In</span>
-            <span>SF</span>
-        </h1>
-        <p>This visualization is created by Emma</p>
-    </div>
+    
+    <h1 class="title">
+        <span>Crime</span>
+        <span>In</span>
+        <span>SF</span>
+    </h1>
+
+    <p class="subtitle">
+        A data analysis and visualization of 8 focus crimes in San Fransisco across the last two decades
+    </p>
+
 </section>
-
-<!-- PROJECTS -->
-<section class="projects">
-    <div class="grid">
-
-        <a href="#" class="btn-card">
-            <h3>Trends Over Time</h3>
-            <p>Two decades of crime evolution across the city</p>
-        </a>
-
-        <a href="#" class="btn-card">
-            <h3>Geographic Patterns</h3>
-            <p>Where crime concentrates across neighborhoods</p>
-        </a>
-
-        <a href="#" class="btn-card">
-            <h3>Seasonality</h3>
-            <p>How crime fluctuates over months and years</p>
-        </a>
-
-        <a href="#" class="btn-card">
-            <h3>Arrest Analysis</h3>
-            <p>Understanding enforcement and outcomes</p>
-        </a>
-
-    </div>
-</section>
-
-<script>
-    const hero = document.querySelector(".hero");
-    const heroContent = document.getElementById("heroContent");
-    const navbar = document.getElementById("navbar");
-
-    window.addEventListener("scroll", () => {
-        const scrollY = window.scrollY;
-        const height = hero.offsetHeight;
-
-        let progress = Math.min(scrollY / height, 1);
-
-        heroContent.style.transform = `scale(${1 - progress * 0.4}) translateY(-${progress * 80}px)`;
-        heroContent.style.opacity = 1 - progress * 0.7;
-
-        if (scrollY > height * 0.6) {
-            navbar.classList.add("show");
-        } else {
-            navbar.classList.remove("show");
-        }
-    });
-</script>
 
 </body>
 </html>
