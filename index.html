@@ -1,12 +1,146 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Data Viz Site</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SF Crime: Two Decades of Data</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #1a1a2e;
+        color: #eaeaea;
+        line-height: 1.6;
+    }
+
+    header {
+        width: 100%;
+        padding: 60px 20px 40px;
+        text-align: center;
+        background: linear-gradient(180deg, #16213e, #1a1a2e);
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        color: #16c79a;
+    }
+
+    .intro {
+        max-width: 700px;
+        margin: 20px auto 0;
+        font-size: 1.1rem;
+        color: #cfcfcf;
+    }
+
+    .container {
+        padding: 40px 20px;
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background-color: #16213e;
+        border-radius: 12px;
+        padding: 20px;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        border-color: #16c79a;
+    }
+
+    .card h3 {
+        margin-top: 0;
+        color: #16c79a;
+    }
+
+    .card p {
+        margin: 10px 0;
+        font-size: 0.95rem;
+        color: #cfcfcf;
+    }
+
+    .card a {
+        text-decoration: none;
+        color: #16c79a;
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+
+    .card a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 2rem;
+        }
+    }
+</style>
 </head>
+
 <body>
-    <h1>Hello World!</h1>
-    <p>HELLLOOOO This site will soon contain interactive data visualizations about crime in San Francisco.</p>
-    <p>HELLLOOOO This site will soon contain interactive data visualizations about crime in San Francisco.</p>
-# <img src="ratiooffocuscrimesweek3.png" alt="Yearly crime trends in SF" style="max-width: 100%;">
+
+<header>
+    <h1>SF Crime: Two Decades of Data</h1>
+    <p class="intro">
+        This portfolio explores crime patterns in San Francisco over the past twenty years using data science techniques.
+        From trend analysis to geospatial insights, each project uncovers stories hidden within public safety data.
+    </p>
+</header>
+
+<div class="container">
+    <div class="grid">
+
+        <div class="card">
+            <h3>Crime Trends Over Time</h3>
+            <p>Analyze how crime categories have evolved across two decades.</p>
+            <a href="#">View Project →</a>
+        </div>
+
+        <div class="card">
+            <h3>Geospatial Heatmaps</h3>
+            <p>Visualize crime density across neighborhoods in San Francisco.</p>
+            <a href="#">View Project →</a>
+        </div>
+
+        <div class="card">
+            <h3>Seasonality Patterns</h3>
+            <p>Discover seasonal fluctuations in crime rates and categories.</p>
+            <a href="#">View Project →</a>
+        </div>
+
+        <div class="card">
+            <h3>Arrest Rate Analysis</h3>
+            <p>Explore arrest trends and their relationship to crime types.</p>
+            <a href="#">View Project →</a>
+        </div>
+
+        <div class="card">
+            <h3>Predictive Modeling</h3>
+            <p>Use machine learning to forecast future crime hotspots.</p>
+            <a href="#">View Project →</a>
+        </div>
+
+        <div class="card">
+            <h3>Data Cleaning Pipeline</h3>
+            <p>See how raw crime data was transformed for analysis.</p>
+            <a href="#">View Project →</a>
+        </div>
+
+    </div>
+</div>
+
 </body>
-</html> 
+</html>
