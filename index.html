@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Crime in SF</title>
-
 <style>
     body {
         margin: 0;
-        background-color: #f2cc60;
+        background-color: #f4efe6; /* warmer paper tone */
         font-family: Georgia, "Times New Roman", serif;
         color: #1a1a1a;
         scroll-behavior: smooth;
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    /* PAPER GRAIN OVERLAY */
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9999;
+        background-image: 
+            repeating-radial-gradient(circle at 0 0, rgba(0,0,0,0.03) 0px, transparent 1px),
+            repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 0px, transparent 1px);
+        background-size: 3px 3px, 4px 4px;
+        opacity: 0.25; /* subtle intensity */
     }
 
     /* NAVBAR */
@@ -20,7 +35,7 @@
         top: 0;
         width: 100%;
         padding: 15px 30px;
-        background: rgba(242, 204, 96, 0.95);
+        background: rgba(244, 239, 230, 0.95);
         border-bottom: 1px solid rgba(0,0,0,0.1);
         font-family: Arial, sans-serif;
         font-weight: bold;
@@ -72,6 +87,9 @@
         font-size: 1.3rem;
         max-width: 800px;
         line-height: 1.6;
+        font-family: Georgia, serif;
+        font-weight: normal;
+        color: #3a3a3a;
     }
 
     /* INTRO SECTION */
@@ -81,6 +99,8 @@
         padding: 0 20px;
         font-size: 1.1rem;
         line-height: 1.7;
+        font-family: Georgia, serif;
+        color: #3a3a3a;
     }
 
     /* PROJECT BUTTONS */
@@ -104,6 +124,8 @@
         color: inherit;
         border: 1px solid rgba(0,0,0,0.1);
         transition: all 0.25s ease;
+        font-family: Georgia, serif;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
 
     .card:hover {
@@ -114,12 +136,14 @@
     .card h3 {
         margin: 0 0 10px;
         font-size: 1.2rem;
+        font-weight: 600;
     }
 
     .card p {
         margin: 0;
         font-size: 0.95rem;
         color: #555;
+        font-weight: 400;
     }
 
     /* MOBILE */
