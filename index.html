@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SF Crime: Two Decades of Data</title>
+<title>Crime Patterns in San Francisco</title>
 
 <style>
     body {
@@ -11,80 +11,109 @@
         font-family: Arial, sans-serif;
         background-color: #1a1a2e;
         color: #eaeaea;
-        line-height: 1.6;
+        scroll-behavior: smooth;
     }
 
-    header {
-        width: 100%;
-        padding: 60px 20px 40px;
+    /* HERO SECTION */
+    .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         text-align: center;
+        position: relative;
         background: linear-gradient(180deg, #16213e, #1a1a2e);
+        overflow: hidden;
     }
 
-    h1 {
-        margin: 0;
-        font-size: 2.5rem;
+    .hero-content {
+        z-index: 2;
+        animation: fadeIn 1.5s ease-in;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
         color: #16c79a;
+        margin-bottom: 20px;
     }
 
-    .intro {
-        max-width: 700px;
-        margin: 20px auto 0;
-        font-size: 1.1rem;
+    .hero p {
+        font-size: 1.2rem;
         color: #cfcfcf;
     }
 
-    .container {
-        padding: 40px 20px;
+    /* Scroll indicator */
+    .scroll-down {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.9rem;
+        color: #16c79a;
+        animation: bounce 2s infinite;
+    }
+
+    /* BUTTON SECTION */
+    .projects {
+        padding: 60px 20px;
         max-width: 1100px;
         margin: auto;
     }
 
     .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 20px;
     }
 
-    .card {
-        background-color: #16213e;
+    .btn-card {
+        display: block;
+        padding: 25px;
         border-radius: 12px;
-        padding: 20px;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        text-align: center;
+        text-decoration: none;
+        background: #16213e;
+        color: #eaeaea;
         border: 1px solid rgba(255,255,255,0.05);
+        transition: all 0.3s ease;
     }
 
-    .card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    .btn-card:hover {
+        transform: translateY(-8px) scale(1.02);
         border-color: #16c79a;
-    }
-
-    .card h3 {
-        margin-top: 0;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         color: #16c79a;
     }
 
-    .card p {
-        margin: 10px 0;
-        font-size: 0.95rem;
+    .btn-card h3 {
+        margin: 0 0 10px;
+        color: #16c79a;
+    }
+
+    .btn-card p {
+        font-size: 0.9rem;
         color: #cfcfcf;
     }
 
-    .card a {
-        text-decoration: none;
-        color: #16c79a;
-        font-weight: bold;
-        font-size: 0.9rem;
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
-    .card a:hover {
-        text-decoration: underline;
+    @keyframes bounce {
+        0%, 100% { transform: translate(-50%, 0); }
+        50% { transform: translate(-50%, -10px); }
     }
 
+    /* Mobile tweaks */
     @media (max-width: 600px) {
-        h1 {
-            font-size: 2rem;
+        .hero h1 {
+            font-size: 2.2rem;
+        }
+
+        .hero p {
+            font-size: 1rem;
         }
     }
 </style>
@@ -92,55 +121,51 @@
 
 <body>
 
-<header>
-    <h1>SF Crime: Two Decades of Data</h1>
-    <p class="intro">
-        This portfolio explores crime patterns in San Francisco over the past twenty years using data science techniques.
-        From trend analysis to geospatial insights, each project uncovers stories hidden within public safety data.
-    </p>
-</header>
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Crime Patterns in San Francisco</h1>
+        <p>This visualization is created by Emma</p>
+    </div>
+    <div class="scroll-down">↓ Scroll</div>
+</section>
 
-<div class="container">
+<!-- PROJECT BUTTONS -->
+<section class="projects">
     <div class="grid">
 
-        <div class="card">
-            <h3>Crime Trends Over Time</h3>
-            <p>Analyze how crime categories have evolved across two decades.</p>
-            <a href="#">View Project →</a>
-        </div>
+        <a href="#" class="btn-card">
+            <h3>Trends Over Time</h3>
+            <p>Explore how crime evolved over 20 years</p>
+        </a>
 
-        <div class="card">
-            <h3>Geospatial Heatmaps</h3>
-            <p>Visualize crime density across neighborhoods in San Francisco.</p>
-            <a href="#">View Project →</a>
-        </div>
+        <a href="#" class="btn-card">
+            <h3>Crime Map</h3>
+            <p>Interactive map of crime hotspots</p>
+        </a>
 
-        <div class="card">
-            <h3>Seasonality Patterns</h3>
-            <p>Discover seasonal fluctuations in crime rates and categories.</p>
-            <a href="#">View Project →</a>
-        </div>
+        <a href="#" class="btn-card">
+            <h3>Seasonality</h3>
+            <p>Monthly and yearly crime patterns</p>
+        </a>
 
-        <div class="card">
-            <h3>Arrest Rate Analysis</h3>
-            <p>Explore arrest trends and their relationship to crime types.</p>
-            <a href="#">View Project →</a>
-        </div>
+        <a href="#" class="btn-card">
+            <h3>Arrests</h3>
+            <p>Analyze arrest rates and trends</p>
+        </a>
 
-        <div class="card">
-            <h3>Predictive Modeling</h3>
-            <p>Use machine learning to forecast future crime hotspots.</p>
-            <a href="#">View Project →</a>
-        </div>
+        <a href="#" class="btn-card">
+            <h3>Predictions</h3>
+            <p>Machine learning crime forecasts</p>
+        </a>
 
-        <div class="card">
-            <h3>Data Cleaning Pipeline</h3>
-            <p>See how raw crime data was transformed for analysis.</p>
-            <a href="#">View Project →</a>
-        </div>
+        <a href="#" class="btn-card">
+            <h3>Data Pipeline</h3>
+            <p>How the dataset was cleaned</p>
+        </a>
 
     </div>
-</div>
+</section>
 
 </body>
 </html>
