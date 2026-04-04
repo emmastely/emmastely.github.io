@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -16,7 +15,6 @@ body {
     background: #ffffff;
 }
 
-/* NAV */
 .navbar {
     position: fixed;
     top: 0;
@@ -36,7 +34,6 @@ body {
     opacity: 1;
 }
 
-/* HERO */
 .hero {
     height: 100vh;
     display: flex;
@@ -76,10 +73,8 @@ body {
     margin-top: 14px;
     font-size: 0.85rem;
     color: #777;
-    letter-spacing: 0.03em;
 }
 
-/* SECTION */
 .section {
     max-width: 720px;
     margin: 120px auto;
@@ -89,11 +84,6 @@ body {
     color: #222;
 }
 
-.section p {
-    margin-bottom: 1.5em;
-}
-
-/* FULL WIDTH VISUAL */
 .visual {
     width: 100%;
     height: 70vh;
@@ -101,44 +91,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
     color: #666;
+    font-size: 0.95rem;
 }
 
-/* SCROLL TEXT + VISUAL */
-.scrolly {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    max-width: 1100px;
-    margin: 120px auto;
-    padding: 0 20px;
-}
-
-.scrolly-text {
-    display: flex;
-    flex-direction: column;
-    gap: 80px;
-}
-
-.step {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: #333;
-}
-
-.sticky-visual {
-    position: sticky;
-    top: 100px;
-    height: 60vh;
-    background: #eaeaea;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #777;
-}
-
-/* FOOTER */
 .footer {
     max-width: 700px;
     margin: 120px auto;
@@ -148,18 +104,6 @@ body {
     border-top: 1px solid #eee;
     padding-top: 40px;
 }
-
-@media (max-width: 900px) {
-    .scrolly {
-        grid-template-columns: 1fr;
-    }
-
-    .sticky-visual {
-        position: relative;
-        height: 300px;
-    }
-}
-
 </style>
 </head>
 
@@ -177,66 +121,73 @@ body {
         <p class="subtitle">
             How prostitution in San Francisco has shifted across streets, hours, and decades
         </p>
-        <p class="byline">Article by Emilie, Emil, and Emma</p>
+        <p class="byline">Article by Emilie, Emil and Emma</p>
     </div>
 </section>
 
-<!-- INTRO -->
+<!-- INTRO PROSTITUTION -->
 <section class="section">
     <p>
-        By exploring data from the San Fransisco Police Department and comparing data of arrests across the last 20 years we see how patterns across neigborhoods and hours cange revealing how the landscape of sexwork has changed. It reveals how the physical arena changes but how the work persists.
-    </p>
-
-    <p>
-        This story traces those movements, using police records from 2005 to 2025 to understand when and where activity becomes visible — and when it fades.
+        Introduction to prostitution
     </p>
 </section>
 
-<!-- FULL WIDTH VISUAL -->
+<!-- DATASET INTRO -->
+<section class="section">
+    <p>
+        Introduction to the data set by SFPD
+    </p>
+</section>
+
+<!-- VIZ 1 -->
 <section class="visual">
-    [ Map or timeline visualization goes here ]
+    [ Line chart: prostitution cases over time ]
 </section>
 
-<!-- SCROLL STORY -->
-<section class="scrolly">
-
-    <div class="scrolly-text">
-
-        <div class="step">
-            In the early 2000s, activity clustered in a small number of districts, forming consistent geographic patterns.
-        </div>
-
-        <div class="step">
-            Over time, those patterns began to shift, spreading across new areas and becoming less predictable.
-        </div>
-
-        <div class="step">
-            By the 2020s, the geography changes again — shaped by policy, technology, and enforcement strategies.
-        </div>
-
-    </div>
-
-    <div class="sticky-visual">
-        [ Interactive visualization updates here ]
-    </div>
-
-</section>
-
-<!-- CLOSING -->
 <section class="section">
     <p>
-        The story of prostitution in San Francisco is not one of disappearance, but of adaptation. Patterns emerge, dissolve, and reappear — shaped by forces both visible and hidden.
+        comment on the spikes there are, the lows, how it changes over time. 
+    </p>
+</section>
+
+<!-- POLICING CHANGE -->
+<section class="section">
+    <p>
+        Introduction to how SFPD policing have changes over the years
+    </p>
+</section>
+
+<!-- VIZ 2 -->
+<section class="visual">
+    [ Interactive map: arrests by year ]
+</section>
+
+<!-- DISPLACEMENT TEXT -->
+<section class="section">
+    <p>
+        Introduction to how this might just have moved the problem
+    </p>
+</section>
+
+<!-- VIZ 3 -->
+<section class="visual">
+    [ Heatmap: movement of arrests across areas + optional filters for other crimes ]
+</section>
+
+<!-- FINAL TEXT -->
+<section class="section">
+    <p>
+Text: Comment on how policing changes moved prostitution into new areas of the city. 
+Very breif discussionon of te data data and maybe a disclaimer on what the data doesn't show
     </p>
 </section>
 
 <div class="footer">
-    Data source: San Francisco Police Department (2005–2025)
+    Data source: San Francisco Police Department
 </div>
 
 <script>
-
 const navbar = document.getElementById("navbar");
-
 window.addEventListener("scroll", () => {
     if (window.scrollY > window.innerHeight * 0.7) {
         navbar.classList.add("show");
@@ -244,7 +195,6 @@ window.addEventListener("scroll", () => {
         navbar.classList.remove("show");
     }
 });
-
 </script>
 
 </body>
