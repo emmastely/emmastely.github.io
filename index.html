@@ -3,238 +3,240 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Crime in SF</title>
+<title>Patterns in the Night</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
-    body {
-        margin: 0;
-        background-color: #f4efe6; /* warmer paper tone */
-        font-family: Georgia, "Times New Roman", serif;
-        color: #1a1a1a;
-        scroll-behavior: smooth;
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: #111;
+    background: #ffffff;
+}
+
+/* NAV */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 18px 40px;
+    background: rgba(255,255,255,0.95);
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1000;
+}
+
+.navbar.show {
+    opacity: 1;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-inner {
+    max-width: 800px;
+}
+
+.kicker {
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    margin: 0;
+}
+
+.subtitle {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* SECTION */
+.section {
+    max-width: 720px;
+    margin: 120px auto;
+    padding: 0 20px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #222;
+}
+
+.section p {
+    margin-bottom: 1.5em;
+}
+
+/* FULL WIDTH VISUAL */
+.visual {
+    width: 100%;
+    height: 70vh;
+    background: #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #666;
+}
+
+/* SCROLL TEXT + VISUAL */
+.scrolly {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 120px auto;
+    padding: 0 20px;
+}
+
+.scrolly-text {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.step {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.sticky-visual {
+    position: sticky;
+    top: 100px;
+    height: 60vh;
+    background: #eaeaea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+}
+
+/* FOOTER */
+.footer {
+    max-width: 700px;
+    margin: 120px auto;
+    padding: 0 20px;
+    font-size: 0.9rem;
+    color: #666;
+    border-top: 1px solid #eee;
+    padding-top: 40px;
+}
+
+@media (max-width: 900px) {
+    .scrolly {
+        grid-template-columns: 1fr;
+    }
+
+    .sticky-visual {
         position: relative;
-        overflow-x: hidden;
+        height: 300px;
     }
+}
 
-    /* PAPER GRAIN OVERLAY */
-    body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 9999;
-        background-image: 
-            repeating-radial-gradient(circle at 0 0, rgba(0,0,0,0.03) 0px, transparent 1px),
-            repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,0.02) 0px, transparent 1px);
-        background-size: 3px 3px, 4px 4px;
-        opacity: 0.25; /* subtle intensity */
-    }
-
-    /* NAVBAR */
-    .navbar {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        padding: 15px 30px;
-        background: rgba(244, 239, 230, 0.95);
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-        font-family: Arial, sans-serif;
-        font-weight: bold;
-        letter-spacing: 0.05em;
-        transform: translateY(-100%);
-        transition: transform 0.4s ease;
-        z-index: 1000;
-    }
-
-    .navbar.show {
-        transform: translateY(0);
-    }
-
-    /* HERO */
-    .hero {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        text-align: center;
-    }
-
-    .hero-content {
-        transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    /* TITLE */
-    .title span {
-        display: block;
-        font-family: "Arial Black", Impact, sans-serif;
-        font-size: clamp(4rem, 14vw, 10rem);
-        color: #7fa8c9;
-        -webkit-text-stroke: 2px #1a1a1a;
-        text-shadow: 5px 5px 0px rgba(0,0,0,0.2);
-        line-height: 0.9;
-        transition: transform 0.2s ease;
-    }
-
-    /* Hover bounce */
-    .title span:hover {
-        transform: translateY(-8px);
-    }
-
-    /* SUBTITLE */
-    .subtitle {
-        margin-top: 40px;
-        font-size: 1.3rem;
-        max-width: 800px;
-        line-height: 1.6;
-        font-family: Georgia, serif;
-        font-weight: normal;
-        color: #3a3a3a;
-    }
-
-    /* INTRO SECTION */
-    .intro {
-        max-width: 700px;
-        margin: 100px auto 60px;
-        padding: 0 20px;
-        font-size: 1.1rem;
-        line-height: 1.7;
-        font-family: Georgia, serif;
-        color: #3a3a3a;
-    }
-
-    /* PROJECT BUTTONS */
-    .projects {
-        max-width: 900px;
-        margin: auto;
-        padding: 40px 20px 100px;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 20px;
-    }
-
-    .card {
-        background: #fffaf0;
-        padding: 20px;
-        border-radius: 10px;
-        text-decoration: none;
-        color: inherit;
-        border: 1px solid rgba(0,0,0,0.1);
-        transition: all 0.25s ease;
-        font-family: Georgia, serif;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-
-    .card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-
-    .card h3 {
-        margin: 0 0 10px;
-        font-size: 1.2rem;
-        font-weight: 600;
-    }
-
-    .card p {
-        margin: 0;
-        font-size: 0.95rem;
-        color: #555;
-        font-weight: 400;
-    }
-
-    /* MOBILE */
-    @media (max-width: 600px) {
-        .subtitle {
-            font-size: 1.1rem;
-        }
-    }
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar" id="navbar">
-    San Fransisco After Dark
+    Patterns in the Night
 </div>
 
 <!-- HERO -->
 <section class="hero">
-    <div class="hero-content" id="heroContent">
-
-        <h1 class="title">
-            <span>Crime</span>
-            <span>In</span>
-            <span>SF</span>
-        </h1>
-
+    <div class="hero-inner">
+        <div class="kicker">San Francisco • 2005–2025</div>
+        <h1 class="title">Patterns in the Night</h1>
         <p class="subtitle">
-           A story of how sex work in San Fransisco has changed over the past two decades
+            How prostitution in San Francisco has shifted across streets, hours, and decades
         </p>
-
     </div>
 </section>
 
-<!-- INTRO TEXT -->
-<section class="intro">
+<!-- INTRO -->
+<section class="section">
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        For two decades, prostitution in San Francisco has not disappeared — it has moved. Across neighborhoods, across hours, and across changing patterns of enforcement, the data reveals a shifting landscape rather than a vanishing one.
+    </p>
+
+    <p>
+        This story traces those movements, using police records from 2005 to 2025 to understand when and where activity becomes visible — and when it fades.
     </p>
 </section>
 
-<!-- PROJECT BUTTONS -->
-<section class="projects">
-    <div class="grid">
-
-        <a href="#" class="card">
-            <h3>Trends Over Time</h3>
-            <p>Explore how crime has evolved across two decades</p>
-        </a>
-
-        <a href="#" class="card">
-            <h3>Geographic Patterns</h3>
-            <p>Understand where crime is concentrated</p>
-        </a>
-
-        <a href="#" class="card">
-            <h3>Seasonality</h3>
-            <p>Monthly and yearly variations in crime</p>
-        </a>
-
-        <a href="#" class="card">
-            <h3>Arrest Rates</h3>
-            <p>Analyze enforcement and outcomes</p>
-        </a>
-
-    </div>
+<!-- FULL WIDTH VISUAL -->
+<section class="visual">
+    [ Map or timeline visualization goes here ]
 </section>
 
+<!-- SCROLL STORY -->
+<section class="scrolly">
+
+    <div class="scrolly-text">
+
+        <div class="step">
+            In the early 2000s, activity clustered in a small number of districts, forming consistent geographic patterns.
+        </div>
+
+        <div class="step">
+            Over time, those patterns began to shift, spreading across new areas and becoming less predictable.
+        </div>
+
+        <div class="step">
+            By the 2020s, the geography changes again — shaped by policy, technology, and enforcement strategies.
+        </div>
+
+    </div>
+
+    <div class="sticky-visual">
+        [ Interactive visualization updates here ]
+    </div>
+
+</section>
+
+<!-- CLOSING -->
+<section class="section">
+    <p>
+        The story of prostitution in San Francisco is not one of disappearance, but of adaptation. Patterns emerge, dissolve, and reappear — shaped by forces both visible and hidden.
+    </p>
+</section>
+
+<div class="footer">
+    Data source: San Francisco Police Department (2005–2025)
+</div>
+
 <script>
-    const hero = document.querySelector(".hero");
-    const heroContent = document.getElementById("heroContent");
-    const navbar = document.getElementById("navbar");
 
-    window.addEventListener("scroll", () => {
-        const scrollY = window.scrollY;
-        const height = hero.offsetHeight;
+const navbar = document.getElementById("navbar");
 
-        let progress = Math.min(scrollY / height, 1);
+window.addEventListener("scroll", () => {
+    if (window.scrollY > window.innerHeight * 0.7) {
+        navbar.classList.add("show");
+    } else {
+        navbar.classList.remove("show");
+    }
+});
 
-        heroContent.style.transform = `scale(${1 - progress * 0.4}) translateY(-${progress * 80}px)`;
-        heroContent.style.opacity = 1 - progress * 0.7;
-
-        if (scrollY > height * 0.6) {
-            navbar.classList.add("show");
-        } else {
-            navbar.classList.remove("show");
-        }
-    });
 </script>
 
 </body>
