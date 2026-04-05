@@ -14,6 +14,30 @@ body {
     color: #111;
     background: #ffffff;
 }
+.visual-inner {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.visual-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    color: #111;
+}
+
+.visual-caption-box {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: #f4f4f4;
+    border-left: 3px solid #ddd;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #444;
+}
 
 .navbar {
     position: fixed;
@@ -104,6 +128,21 @@ body {
     border-top: 1px solid #eee;
     padding-top: 40px;
 }
+
+.hero-inner {
+    max-width: 800px;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.title {
+    transition: transform 0.4s ease;
+}
+
+.hero.shrink .hero-inner {
+    transform: translateY(-40px) scale(0.75);
+    opacity: 0.6;
+}
+
 </style>
 </head>
 
@@ -189,7 +228,7 @@ and
 <!-- VIZ 3 -->
 <section class="visual">
   <div class="visual-inner">
-    
+
     <div class="visual-title">
       Figure 3 — Prostitution hotspots in the Mission District over time
     </div>
@@ -201,8 +240,9 @@ and
       frameborder="0">
     </iframe>
 
-    <div class="visual-caption">
-      The heatmap shows how reported prostitution incidents remain concentrated in the Mission District, while gradually shifting between nearby streets across years.
+    <div class="visual-caption-box">
+      The heatmap shows how reported prostitution incidents remain concentrated 
+      in the Mission District, while gradually shifting between nearby streets across years.
     </div>
 
   </div>
@@ -231,11 +271,24 @@ and
 
 <script>
 const navbar = document.getElementById("navbar");
+const hero = document.querySelector(".hero");
+
 window.addEventListener("scroll", () => {
-    if (window.scrollY > window.innerHeight * 0.7) {
+    const scrollY = window.scrollY;
+    const trigger = window.innerHeight * 0.4;
+
+    // Navbar fade in
+    if (scrollY > window.innerHeight * 0.7) {
         navbar.classList.add("show");
     } else {
         navbar.classList.remove("show");
+    }
+
+    // Hero shrink effect
+    if (scrollY > trigger) {
+        hero.classList.add("shrink");
+    } else {
+        hero.classList.remove("shrink");
     }
 });
 </script>
