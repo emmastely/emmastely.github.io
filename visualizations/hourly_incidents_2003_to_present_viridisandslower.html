@@ -9,3 +9,19 @@
                         })                };            </script>        </div>
 </body>
 </html>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const plot = document.querySelector('.plotly-graph-div');
+
+    // Stop autoplay (force pause)
+    Plotly.animate(plot, null, {
+        frame: {duration: 0},
+        mode: "immediate"
+    });
+
+    // Override animation speed
+    plot.layout.updatemenus[0].buttons[0].args[1].frame.duration = 1200;
+    plot.layout.updatemenus[0].buttons[0].args[1].transition.duration = 600;
+});
+</script>s
