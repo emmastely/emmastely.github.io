@@ -1,2 +1,59 @@
-html
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patterns in the Night</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .story-container {
+            max-width: 800px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #4B0082;
+            margin-top: 0;
+        }
+        p {
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+        .static-chart {
+            width: 100%;
+            height: auto;
+            margin: 30px 0;
+            display: block;
+        }
+        .caption {
+            font-size: 0.85em;
+            color: #777;
+            text-align: right;
+            font-style: italic;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="story-container">
+        <h1>Patterns in the Night: Two Decades of Data</h1>
+        <p>
+            When diving into the San Francisco dataset, a clear shift in reported prostitution cases emerges over time. 
+            The static chart below, generated using Python and Matplotlib, visualizes the trend from 2003 to 2025.
+        </p>
+        <img src="prostitution_over_time_2003_2025.svg" alt="Line chart showing prostitution trend in San Francisco" class="static-chart">
+        <p class="caption">Source: San Francisco Police Department Incident Reports (2003-2025)</p>
+    </div>
+</body>
+</html>
