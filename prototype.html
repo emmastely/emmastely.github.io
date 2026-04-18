@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article Title</title>
+
+  <!-- Google Fonts — delete these 3 lines to use system fonts instead -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:        #1a1a18;
+      --ink-muted:  #666660;
+      --ink-faint:  #999993;
+      --paper:      #faf9f6;
+      --paper-warm: #f3f1eb;
+      --accent:     #d4522a;
+      --rule:       #dddbd4;
+      --prose:      680px;
+      --wide:       1000px;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 52px;
+      z-index: 10;
+    }
+    .nav-brand {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-series {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      color: var(--ink-faint);
+    }
+
+    /* HERO */
+    .hero {
+      max-width: var(--wide);
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: end;
+    }
+    .hero-overline {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.12;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+    .hero-deck {
+      font-size: 1rem;
+      color: var(--ink-muted);
+    }
+    .hero-meta {
+      margin-top: 1.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+      display: flex;
+      gap: 0.75rem;
+    }
+    .hero-meta a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+    .hero-img {
+      aspect-ratio: 4/3;
+      background: var(--paper-warm);
+      border: 1px solid var(--rule);
+    }
+
+    /* LAYOUT */
+    .prose { max-width: var(--prose); margin: 0 auto; padding: 0 2rem; }
+    .wide  { max-width: var(--wide);  margin: 0 auto; padding: 0 2rem; }
+    hr     { border: none; border-top: 1px solid var(--rule); }
+    p      { margin-bottom: 1.25rem; }
+
+    /* SECTION */
+    .section {
+      padding: 3.5rem 0 1rem;
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .section-number {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+
+    /* SUBSECTION */
+    .subsection { margin-top: 2.5rem; }
+    .subsection-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 0.4rem;
+    }
+    .subsection h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    /* FIGURE */
+    figure { margin: 2.5rem 0; }
+    .img-placeholder {
+      background: var(--paper-warm);
+      border: 1px solid var(--rule);
+      aspect-ratio: 16/7;
+    }
+    figcaption {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      color: var(--ink-faint);
+      margin-top: 0.6rem;
+    }
+    .figure-wide { margin: 2.5rem -4rem; }
+
+    /* PULL QUOTE */
+    blockquote {
+      border-left: 3px solid var(--accent);
+      background: #f7ece6;
+      padding: 1.5rem 2rem;
+      margin: 2.5rem 0;
+    }
+    blockquote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      line-height: 1.55;
+      margin-bottom: 0;
+    }
+
+    /* TAKEAWAY */
+    .takeaway {
+      background: var(--paper-warm);
+      border: 1px solid var(--rule);
+      padding: 1.5rem 1.75rem;
+      margin: 2.5rem 0;
+    }
+    .takeaway-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 0.75rem;
+    }
+    .takeaway ul { list-style: none; }
+    .takeaway li {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      padding-left: 1.2rem;
+      position: relative;
+      margin-bottom: 0.4rem;
+    }
+    .takeaway li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      background: var(--paper-warm);
+      border-top: 1px solid var(--rule);
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+    }
+    .footer-grid {
+      max-width: var(--wide);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    footer h4 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 0.75rem;
+    }
+    footer p { font-size: 0.9rem; color: var(--ink-muted); }
+
+    /* RESPONSIVE */
+    @media (max-width: 680px) {
+      body { font-size: 16px; }
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.25rem 2rem; }
+      .hero-img { display: none; }
+      .prose { padding: 0 1.25rem; }
+      .figure-wide { margin: 2rem 0; }
+      .footer-grid { grid-template-columns: 1fr; }
+      footer { padding: 2rem 1.25rem; }
+      nav { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Publication Name</a>
+  <span class="nav-series">Part 3 of 4</span>
+</nav>
+
+
+<!-- HERO -->
+<header class="hero">
+  <div>
+    <p class="hero-overline">Series Name · Part 3</p>
+    <h1>Article Title</h1>
+    <p class="hero-deck">One-sentence description.</p>
+    <div class="hero-meta">
+      <span>By <a href="#">Author Name</a></span>
+      <span>·</span>
+      <span>Month Year</span>
+    </div>
+  </div>
+  <div class="hero-img">
+    <!-- <img src="your-image.gif" alt=""> -->
+  </div>
+</header>
+
+<div class="wide"><hr></div>
+
+
+<!-- INTRODUCTION -->
+<div class="prose">
+  <section class="section">
+    <h2>Introduction</h2>
+    <p></p>
+  </section>
+</div>
+
+
+<!-- SECTION 1 -->
+<div class="prose">
+  <section class="section">
+    <p class="section-number">01</p>
+    <h2>Section Title</h2>
+
+    <p></p>
+
+    <div class="subsection">
+      <p class="subsection-label">Label</p>
+      <h3>Sub-heading</h3>
+    </div>
+    <p></p>
+
+    <figure>
+      <div class="img-placeholder"></div>
+      <figcaption>Caption</figcaption>
+    </figure>
+
+    <blockquote>
+      <p>Pull quote text.</p>
+    </blockquote>
+
+    <div class="takeaway">
+      <p class="takeaway-label">Takeaway</p>
+      <ul>
+        <li>Point one.</li>
+        <li>Point two.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+
+<!-- WIDE FIGURE -->
+<div class="prose">
+  <figure class="figure-wide">
+    <div class="img-placeholder"></div>
+    <figcaption>Caption</figcaption>
+  </figure>
+</div>
+
+
+<!-- SECTION 2 -->
+<div class="prose">
+  <section class="section">
+    <p class="section-number">02</p>
+    <h2>Section Title</h2>
+
+    <p></p>
+
+    <figure>
+      <div class="img-placeholder"></div>
+      <figcaption>Caption</figcaption>
+    </figure>
+
+    <div class="takeaway">
+      <p class="takeaway-label">Takeaway</p>
+      <ul>
+        <li>Point one.</li>
+        <li>Point two.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+
+<!-- SECTION 3 -->
+<div class="prose">
+  <section class="section">
+    <p class="section-number">03</p>
+    <h2>Section Title</h2>
+
+    <p></p>
+
+    <figure>
+      <div class="img-placeholder"></div>
+      <figcaption>Caption</figcaption>
+    </figure>
+
+    <div class="takeaway">
+      <p class="takeaway-label">Takeaway</p>
+      <ul>
+        <li>Point one.</li>
+        <li>Point two.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+
+<!-- CONCLUSION -->
+<div class="prose">
+  <section class="section">
+    <h2>Conclusion</h2>
+    <p></p>
+  </section>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>Methodology</h4>
+      <p></p>
+    </div>
+    <div>
+      <h4>About this series</h4>
+      <p></p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
