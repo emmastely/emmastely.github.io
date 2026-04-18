@@ -3,38 +3,164 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Article Title</title>
+  <title>NYC Vehicle Accidents</title>
 
   <!-- Google Fonts — delete these 3 lines to use system fonts instead -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --ink:        #1a1a18;
-      --ink-muted:  #666660;
-      --ink-faint:  #999993;
+      --ink-muted:  #555550;
+      --ink-faint:  #909088;
       --paper:      #faf9f6;
-      --paper-warm: #f3f1eb;
-      --accent:     #d4522a;
-      --rule:       #dddbd4;
-      --prose:      680px;
-      --wide:       1000px;
+      --paper-warm: #f2f0ea;
+      --accent:     #c0392b;
+      --rule:       #e0ddd6;
+      --prose:      660px;
+      --wide:       960px;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--paper);
       color: var(--ink);
       font-family: 'Source Serif 4', Georgia, serif;
       font-size: 18px;
-      line-height: 1.75;
+      line-height: 1.78;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* NAV */
+    /* ─────────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: #0e0d0b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 5rem;
+      overflow: hidden;
+    }
+
+    /* subtle background texture — replace with a real photo if you have one */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(80,20,10,0.35) 0%, transparent 70%),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(255,255,255,0.012) 2px,
+          rgba(255,255,255,0.012) 4px
+        );
+      pointer-events: none;
+    }
+
+    /* optional: swap the ::before for a real image like this:
+       .hero { background: url('your-photo.jpg') center/cover no-repeat; }
+       and add:  .hero::after { content:''; position:absolute; inset:0;
+                 background: rgba(0,0,0,0.58); } */
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+    }
+
+    .hero-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.6rem, 7vw, 5rem);
+      font-weight: 900;
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 700;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .hero-subtitle {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      font-style: italic;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-rule {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.25);
+      margin: 0 auto 2rem;
+    }
+
+    .hero-meta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.04em;
+    }
+    .hero-meta strong {
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      animation: bounce 2.4s ease-in-out infinite;
+    }
+    .hero-scroll svg { opacity: 0.25; }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ─────────────────────────────────────────────
+       NAV (appears after hero)
+    ───────────────────────────────────────────── */
     nav {
       position: sticky;
       top: 0;
@@ -44,175 +170,236 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 2rem;
-      height: 52px;
-      z-index: 10;
+      height: 50px;
+      z-index: 100;
     }
     .nav-brand {
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--ink);
       text-decoration: none;
     }
-    .nav-series {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.78rem;
-      color: var(--ink-faint);
-    }
-
-    /* HERO */
-    .hero {
-      max-width: var(--wide);
-      margin: 0 auto;
-      padding: 5rem 2rem 3rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: end;
-    }
-    .hero-overline {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2.2rem, 5vw, 3.4rem);
-      line-height: 1.12;
-      font-weight: 700;
-      margin-bottom: 1.25rem;
-    }
-    .hero-deck {
-      font-size: 1rem;
-      color: var(--ink-muted);
-    }
-    .hero-meta {
-      margin-top: 1.5rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.8rem;
-      color: var(--ink-faint);
+    .nav-links {
       display: flex;
-      gap: 0.75rem;
+      gap: 2rem;
+      list-style: none;
     }
-    .hero-meta a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
-    .hero-img {
-      aspect-ratio: 4/3;
-      background: var(--paper-warm);
-      border: 1px solid var(--rule);
+    .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      color: var(--ink-faint);
+      text-decoration: none;
+      letter-spacing: 0.04em;
     }
+    .nav-links a:hover { color: var(--ink); }
 
-    /* LAYOUT */
+    /* ─────────────────────────────────────────────
+       SHARED LAYOUT
+    ───────────────────────────────────────────── */
     .prose { max-width: var(--prose); margin: 0 auto; padding: 0 2rem; }
     .wide  { max-width: var(--wide);  margin: 0 auto; padding: 0 2rem; }
-    hr     { border: none; border-top: 1px solid var(--rule); }
-    p      { margin-bottom: 1.25rem; }
+    p      { margin-bottom: 1.3rem; }
+    a      { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(192,57,43,0.3); }
+    a:hover { border-bottom-color: var(--accent); }
 
-    /* SECTION */
+    /* ─────────────────────────────────────────────
+       INTRO BLOCK (drops in after hero)
+    ───────────────────────────────────────────── */
+    .intro-block {
+      padding: 5rem 0 2rem;
+    }
+    .intro-block .intro-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .intro-block p:first-of-type::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8rem;
+      font-weight: 900;
+      float: left;
+      line-height: 0.82;
+      margin-right: 0.08em;
+      margin-top: 0.1em;
+      color: var(--accent);
+    }
+    .intro-block p {
+      font-size: 1.05rem;
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTIONS
+    ───────────────────────────────────────────── */
     .section {
-      padding: 3.5rem 0 1rem;
-      border-top: 1px solid var(--rule);
-      margin-top: 3rem;
+      padding: 4rem 0 1rem;
+      margin-top: 1rem;
+    }
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
     }
     .section-number {
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
+      color: var(--ink-faint);
+      white-space: nowrap;
     }
     .section h2 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
       font-weight: 700;
+      line-height: 1.18;
+      margin-bottom: 0.5rem;
+    }
+    .section-intro {
+      font-size: 1rem;
+      color: var(--ink-muted);
+      font-style: italic;
       margin-bottom: 2rem;
+      border-left: 2px solid var(--rule);
+      padding-left: 1rem;
     }
 
-    /* SUBSECTION */
-    .subsection { margin-top: 2.5rem; }
-    .subsection-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 0.4rem;
-    }
-    .subsection h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    /* FIGURE */
-    figure { margin: 2.5rem 0; }
-    .img-placeholder {
-      background: var(--paper-warm);
-      border: 1px solid var(--rule);
-      aspect-ratio: 16/7;
-    }
-    figcaption {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.78rem;
-      color: var(--ink-faint);
-      margin-top: 0.6rem;
-    }
-    .figure-wide { margin: 2.5rem -4rem; }
-
-    /* PULL QUOTE */
-    blockquote {
-      border-left: 3px solid var(--accent);
-      background: #f7ece6;
-      padding: 1.5rem 2rem;
+    /* ─────────────────────────────────────────────
+       FIGURE
+    ───────────────────────────────────────────── */
+    .figure-block {
       margin: 2.5rem 0;
     }
-    blockquote p {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-style: italic;
-      line-height: 1.55;
-      margin-bottom: 0;
+    .figure-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 0.6rem;
     }
-
-    /* TAKEAWAY */
-    .takeaway {
+    .fig-placeholder {
+      width: 100%;
       background: var(--paper-warm);
       border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      color: var(--ink-faint);
+    }
+    .fig-placeholder.tall   { aspect-ratio: 4/3; }
+    .fig-placeholder.wide   { aspect-ratio: 16/6; }
+    .fig-placeholder.square { aspect-ratio: 1/1; }
+
+    .fig-caption {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      line-height: 1.55;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--rule);
+    }
+    .fig-caption strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* ─────────────────────────────────────────────
+       TAKEAWAY
+    ───────────────────────────────────────────── */
+    .takeaway {
+      background: var(--paper-warm);
+      border-left: 3px solid var(--accent);
       padding: 1.5rem 1.75rem;
       margin: 2.5rem 0;
     }
     .takeaway-label {
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 0.75rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
     }
-    .takeaway ul { list-style: none; }
+    .takeaway ul { list-style: none; padding: 0; }
     .takeaway li {
-      font-size: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
       color: var(--ink-muted);
-      padding-left: 1.2rem;
+      padding-left: 1.25rem;
       position: relative;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.55;
     }
-    .takeaway li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+    .takeaway li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
 
-    /* FOOTER */
-    footer {
-      background: var(--paper-warm);
+    /* ─────────────────────────────────────────────
+       BRIDGE TEXT (leads into next section)
+    ───────────────────────────────────────────── */
+    .bridge {
+      padding: 3rem 0;
       border-top: 1px solid var(--rule);
+      margin-top: 2rem;
+    }
+    .bridge p {
+      font-size: 1rem;
+      color: var(--ink-muted);
+    }
+    .bridge .bridge-cue {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--ink);
+      margin-top: 1rem;
+    }
+
+    /* ─────────────────────────────────────────────
+       CONCLUSION
+    ───────────────────────────────────────────── */
+    .conclusion {
+      padding: 4rem 0 3rem;
+      margin-top: 2rem;
+      border-top: 2px solid var(--ink);
+    }
+    .conclusion h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    footer {
+      background: #0e0d0b;
+      color: rgba(255,255,255,0.35);
       padding: 3rem 2rem;
       margin-top: 4rem;
     }
-    .footer-grid {
+    .footer-inner {
       max-width: var(--wide);
       margin: 0 auto;
       display: grid;
@@ -221,175 +408,290 @@
     }
     footer h4 {
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.14em;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--ink-faint);
+      color: rgba(255,255,255,0.5);
       margin-bottom: 0.75rem;
     }
-    footer p { font-size: 0.9rem; color: var(--ink-muted); }
+    footer p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+    footer a { color: rgba(255,255,255,0.5); border-bottom-color: rgba(255,255,255,0.2); }
 
-    /* RESPONSIVE */
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
     @media (max-width: 680px) {
       body { font-size: 16px; }
-      .hero { grid-template-columns: 1fr; padding: 3rem 1.25rem 2rem; }
-      .hero-img { display: none; }
       .prose { padding: 0 1.25rem; }
-      .figure-wide { margin: 2rem 0; }
-      .footer-grid { grid-template-columns: 1fr; }
+      .wide  { padding: 0 1.25rem; }
+      nav    { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .footer-inner { grid-template-columns: 1fr; }
       footer { padding: 2rem 1.25rem; }
-      nav { padding: 0 1.25rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ── HERO ─────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-label"> New York City</p>
+
+    <h1>Collision<br><em>City</em></h1>
+
+    <p class="hero-subtitle">
+      Catchy subtitle something with vehicle crashes shaping the life in NYC
+    </p>
+
+    <div class="hero-rule"></div>
+
+    <p class="hero-meta">
+      By <strong>Our names</strong> &nbsp;·&nbsp; April 2026
+    </p>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Let's dive into it</span>
+    <svg width="12" height="18" viewBox="0 0 12 18" fill="none">
+      <path d="M6 0v14M1 9l5 6 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ── NAV ───────────────────────────────────────── -->
 <nav>
-  <a href="#" class="nav-brand">Publication Name</a>
-  <span class="nav-series">Part 3 of 4</span>
+  <a href="#" class="nav-brand">NYC motor vehicle collisions</a>
+  <ul class="nav-links">
+    <li><a href="#over-time">Over time</a></li>
+    <li><a href="#spatial">Spatial spread</a></li>
+    <li><a href="#causes">Causes</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
 </nav>
 
 
-<!-- HERO -->
-<header class="hero">
-  <div>
-    <p class="hero-overline">Series Name · Part 3</p>
-    <h1>Article Title</h1>
-    <p class="hero-deck">One-sentence description.</p>
-    <div class="hero-meta">
-      <span>By <a href="#">Author Name</a></span>
-      <span>·</span>
-      <span>Month Year</span>
-    </div>
+<!-- ── INTRODUCTION ──────────────────────────────── -->
+<div class="prose">
+  <div class="intro-block">
+    <p class="intro-label">Introduction</p>
+
+    <p>
+      Introduction to problem and core concept(vehicle crashes NYC)
+    </p>
+
+    <p>
+      Introduction to the dataset
+    </p>
+
+    <p>
+      Overview of what is to come and what to expect. 
+    </p>
+
   </div>
-  <div class="hero-img">
-    <!-- <img src="your-image.gif" alt=""> -->
+</div>
+
+
+<!-- ── SECTION 1: CRASHES OVER TIME ─────────────── -->
+<div class="prose">
+  <section class="section" id="over-time">
+
+    <div class="section-divider">
+      <span class="section-number">Section 01 &nbsp;·&nbsp; Over Time</span>
+    </div>
+
+    <h2>Vehicle Crashes Over Time</h2>
+    <p class="section-intro">
+      How has the frequency of collisions changed across the years? Are there patterns, are there certain days that stand out?
+    </p>
+
+    <p>
+      Small paragraph of text leading to the visualizaiton
+    </p>
+
+    <!-- FIGURE 1 -->
+    <div class="figure-block">
+      <p class="figure-label">Figure 1</p>
+      <div class="fig-placeholder wide">
+        <!-- Insert your time-series chart here -->
+        chart showing distribution of crashes over time
+      </div>
+      <div class="fig-caption">
+        <strong>Crashes recorded over time, 2012–present.</strong>
+        Explaination of the data. See the spikes? Snowstorms! The reduction? Policy changes, investments in bike lanes and safer traffic.
+      </div>
+    </div>
+
+    <p>
+      Follow-up paragraph after the figure. Interpretation of visualization 1. 
+    </p>
+
+    <div class="takeaway">
+      <p class="takeaway-label">Takeaways</p>
+      <ul>
+        <li>First key finding from the over-time analysis.</li>
+        <li>Second finding — e.g. seasonal pattern or trend direction.</li>
+        <li>Third finding — an anomaly or turning point worth flagging.</li>
+      </ul>
+    </div>
+
+  </section>
+</div>
+
+
+<!-- ── SECTION 2: SPATIAL SPREAD ─────────────────── -->
+<div class="prose">
+  <section class="section" id="spatial">
+
+    <div class="section-divider">
+      <span class="section-number">Section 02 &nbsp;·&nbsp; Spatial distribution</span>
+    </div>
+
+    <h2>Where Crashes Happen</h2>
+    <p class="section-intro">
+      Subtitle
+    </p>
+
+    <p>
+      Introductory paragraph before the map. Set up what the reader is about to look at —
+      is it a heat map by borough, by neighbourhood, by street? What should they look for?
+    </p>
+
+    <!-- FIGURE 2 -->
+    <div class="figure-block">
+      <p class="figure-label">Figure 2</p>
+      <div class="fig-placeholder tall">
+        <!-- Insert your heatmap here -->
+        heatmap of crash density across NYC
+      </div>
+      <div class="fig-caption">
+        <strong>Where more crashes happen in NYC boroughs.</strong>
+        Description and explanation. What stands out?
+      </div>
+    </div>
+
+    <p>
+      Analysis, link to something tangible. 
+    </p>
+
+    <div class="takeaway">
+      <p class="takeaway-label">Takeaways</p>
+      <ul>
+        <li>Which areas show the highest crash density and why.</li>
+        <li>A borough comparison? More accidents in Brooklyn, less in Manhattan</li>
+      </ul>
+    </div>
+
+  </section>
+</div>
+
+
+<!-- ── BRIDGE INTO SECTION 3 ──────────────────────── -->
+<div class="prose">
+  <div class="bridge">
+    <p>
+      We know when crashes happen and where they cluster —
+      but the most urgent question may be the simplest one:
+    </p>
+    <p class="bridge-cue">
+        What is causing these accidents?
+    </p>
   </div>
-</header>
-
-<div class="wide"><hr></div>
-
-
-<!-- INTRODUCTION -->
-<div class="prose">
-  <section class="section">
-    <h2>Introduction</h2>
-    <p></p>
-  </section>
 </div>
 
 
-<!-- SECTION 1 -->
+<!-- ── SECTION 3: CAUSES ──────────────────────────── -->
 <div class="prose">
-  <section class="section">
-    <p class="section-number">01</p>
-    <h2>Section Title</h2>
+  <section class="section" id="causes">
 
-    <p></p>
-
-    <div class="subsection">
-      <p class="subsection-label">Label</p>
-      <h3>Sub-heading</h3>
+    <div class="section-divider">
+      <span class="section-number">Section 03 &nbsp;·&nbsp; Causes</span>
     </div>
-    <p></p>
 
-    <figure>
-      <div class="img-placeholder"></div>
-      <figcaption>Caption</figcaption>
-    </figure>
+    <h2>Types of Accidents &amp; Their Causes</h2>
+    <p class="section-intro">
+      Subtitle to why look at causes
+    </p>
 
-    <blockquote>
-      <p>Pull quote text.</p>
-    </blockquote>
+    <p>
+      Set up the interactive visualisation here. Explain what the reader can do with it —
+      filter by year, compare causes, look for rising or declining categories.
+      Give them one specific thing to look for before they start exploring. Give a little bit of a martini glass style where the last vizualisation is a little bit more open for exploration??
+    </p>
+
+    <!-- FIGURE 3 -->
+    <div class="figure-block">
+      <p class="figure-label">Figure 3 &nbsp;·&nbsp; Interactive</p>
+      <div class="fig-placeholder tall">
+        <!-- Insert your interactive causes chart here -->
+        interactive chart — causes of accidents, explorable over time
+      </div>
+      <div class="fig-caption">
+        <strong>Contributing factors in NYC vehicle collisions, by year.</strong>
+        Describe and explain what is going on in the visualzation.
+      </div>
+    </div>
+
+    <p>
+      Post-figure analysis. What does the causes data tell us about the problem's
+      nature. Much due to inattentiveness, slippery pavement. 
+    </p>
 
     <div class="takeaway">
-      <p class="takeaway-label">Takeaway</p>
+      <p class="takeaway-label">Takeaways</p>
       <ul>
-        <li>Point one.</li>
-        <li>Point two.</li>
+        <li>The single most common contributing factor in the dataset.</li>
+        <li>A cause that has changed most significantly over time.</li>
       </ul>
     </div>
+
   </section>
 </div>
 
 
-<!-- WIDE FIGURE -->
+<!-- ── CONCLUSION ──────────────────────────────────── -->
 <div class="prose">
-  <figure class="figure-wide">
-    <div class="img-placeholder"></div>
-    <figcaption>Caption</figcaption>
-  </figure>
-</div>
-
-
-<!-- SECTION 2 -->
-<div class="prose">
-  <section class="section">
-    <p class="section-number">02</p>
-    <h2>Section Title</h2>
-
-    <p></p>
-
-    <figure>
-      <div class="img-placeholder"></div>
-      <figcaption>Caption</figcaption>
-    </figure>
-
-    <div class="takeaway">
-      <p class="takeaway-label">Takeaway</p>
-      <ul>
-        <li>Point one.</li>
-        <li>Point two.</li>
-      </ul>
-    </div>
-  </section>
-</div>
-
-
-<!-- SECTION 3 -->
-<div class="prose">
-  <section class="section">
-    <p class="section-number">03</p>
-    <h2>Section Title</h2>
-
-    <p></p>
-
-    <figure>
-      <div class="img-placeholder"></div>
-      <figcaption>Caption</figcaption>
-    </figure>
-
-    <div class="takeaway">
-      <p class="takeaway-label">Takeaway</p>
-      <ul>
-        <li>Point one.</li>
-        <li>Point two.</li>
-      </ul>
-    </div>
-  </section>
-</div>
-
-
-<!-- CONCLUSION -->
-<div class="prose">
-  <section class="section">
+  <section class="conclusion" id="conclusion">
     <h2>Conclusion</h2>
-    <p></p>
+
+    <p>
+      Bring the three threads together here — the temporal pattern, the spatial concentration,
+      and the causal landscape.
+    </p>
+
+    <p>
+      ENd with something human. Hhat is the takehome message? 
+    </p>
+
   </section>
 </div>
 
 
-<!-- FOOTER -->
+<!-- ── FOOTER ──────────────────────────────────────── -->
 <footer>
-  <div class="footer-grid">
+  <div class="footer-inner">
     <div>
-      <h4>Methodology</h4>
-      <p></p>
+      <h4>Data &amp; Methodology</h4>
+      <p>
+        Data sourced from the
+        <a href="https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95">
+          NYPD Motor Vehicle Collisions dataset
+        </a>
+        via NYC Open Data. Describe any cleaning steps, date range used,
+        and any known limitations of the data here.
+      </p>
     </div>
     <div>
-      <h4>About this series</h4>
-      <p></p>
+      <h4>About</h4>
+      <p>
+        Written and visualised by.... Tools used, acknowledgements
+      </p>
     </div>
   </div>
 </footer>
