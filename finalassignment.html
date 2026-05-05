@@ -1,46 +1,847 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Assignment page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Guide for Foreign Drivers in New York</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d0e11;
+      --bg-card: #13151a;
+      --bg-card2: #181b22;
+      --border: rgba(255,255,255,0.07);
+      --accent: #e8c547;
+      --accent2: #e05c3a;
+      --text: #d4d6dc;
+      --text-muted: #6b7280;
+      --text-dim: #9ca3af;
+      --radius: 14px;
+      --grid-color: rgba(255,255,255,0.035);
+      --figure-bg: #1c1f26;
+      --figure-border: rgba(255,255,255,0.10);
+      --figure-text: rgba(255,255,255,0.18);
+      --hero-overlay-start: rgba(13,14,17,0.82);
+      --hero-overlay-mid: rgba(13,14,17,0.55);
+      --hero-overlay-end: rgba(13,14,17,0.10);
+      --closing-bg-start: #151821;
+      --closing-bg-end: #1a1d28;
+      --prose-strong: #fff;
+      --h2-color: #fff;
+      --h3-color: #fff;
+    }
+
+    html[data-theme="light"] {
+      --bg: #f2f3f5;
+      --bg-card: #ffffff;
+      --bg-card2: #f8f9fb;
+      --border: rgba(0,0,0,0.09);
+      --text: #374151;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+      --grid-color: rgba(0,0,0,0.045);
+      --figure-bg: #e8eaef;
+      --figure-border: rgba(0,0,0,0.12);
+      --figure-text: rgba(0,0,0,0.28);
+      --hero-overlay-start: rgba(242,243,245,0.80);
+      --hero-overlay-mid: rgba(242,243,245,0.50);
+      --hero-overlay-end: rgba(242,243,245,0.05);
+      --closing-bg-start: #eef0f5;
+      --closing-bg-end: #e8ebf2;
+      --prose-strong: #111827;
+      --h2-color: #111827;
+      --h3-color: #1f2937;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size: 40px 40px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* ── THEME TOGGLE ── */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toggle-track {
+      position: relative;
+      width: 48px;
+      height: 26px;
+      background: var(--bg-card2, #181b22);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    html[data-theme="light"] .toggle-track {
+      background: #dde1ea;
+    }
+
+    .toggle-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      transition: transform 0.25s cubic-bezier(.4,0,.2,1), background 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      line-height: 1;
+    }
+
+    html[data-theme="light"] .toggle-thumb {
+      transform: translateX(22px);
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── DATE BAR ── */
+    .datebar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0 14px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .datebar-map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #000;
+      font-family: 'DM Mono', monospace;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 5px 12px;
+      border-radius: 4px;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      white-space: nowrap;
+    }
+    .datebar-map-link:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 28px 0 48px;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-img-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1a1d25 0%, #252830 40%, #1c1f28 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* City skyline silhouette via SVG */
+    .hero-img-placeholder svg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      opacity: 0.25;
+    }
+
+    /* Photo placeholder label */
+    .hero-img-placeholder::after {
+      content: "[ YOUR HERO IMAGE ]";
+      position: absolute;
+      bottom: 14px;
+      right: 18px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.1em;
+    }
+
+    /* gradient overlay on right side so text on left is readable */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        var(--hero-overlay-start) 0%,
+        var(--hero-overlay-mid) 45%,
+        var(--hero-overlay-end) 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      padding: 36px 40px;
+      max-width: 480px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(46px, 8vw, 78px);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: #fff;
+      text-shadow: 0 2px 30px rgba(0,0,0,0.6);
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      margin-top: 16px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      font-style: italic;
+      max-width: 320px;
+    }
+
+    /* ── SECTION HEADING ── */
+    h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.04em;
+      color: var(--h2-color);
+      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--h3-color);
+      margin-bottom: 8px;
+    }
+
+    /* ── PROSE ── */
+    .prose {
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    .prose p { margin-bottom: 16px; }
+    .prose p:last-child { margin-bottom: 0; }
+
+    .prose strong { color: var(--prose-strong); font-weight: 600; }
+
+    .prose em { color: var(--accent); font-style: normal; font-weight: 500; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 28px;
+    }
+
+    /* ── FIGURE PLACEHOLDER ── */
+    .figure-placeholder {
+      background: var(--figure-bg);
+      border: 1.5px dashed var(--figure-border);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--figure-text);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .figure-placeholder .fig-icon {
+      font-size: 28px;
+      opacity: 0.35;
+    }
+
+    .figure-placeholder.tall { height: 340px; }
+    .figure-placeholder.medium { height: 240px; }
+    .figure-placeholder.short { height: 160px; }
+    .figure-placeholder.map { height: 420px; }
+
+    .figure-caption {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+      margin-bottom: 32px;
+      margin-top: -12px;
+    }
+
+    /* ── STAT CARDS ── */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      text-align: center;
+    }
+
+    .stat-card .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-card .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── PULLQUOTE ── */
+    .pullquote {
+      border-left: 4px solid var(--accent);
+      padding: 16px 24px;
+      margin: 36px 0;
+      background: rgba(232,197,71,0.05);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .pullquote p {
+      font-size: 20px;
+      line-height: 1.5;
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+      font-style: italic;
+    }
+
+    /* ── SEASON TOGGLE ── */
+    .season-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 36px;
+    }
+
+    .season-question {
+      padding: 28px 32px 20px;
+      text-align: center;
+    }
+
+    .season-question p {
+      font-size: 18px;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+
+    .season-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .btn-season {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.22s ease;
+      letter-spacing: 0.03em;
+    }
+
+    .btn-summer {
+      background: rgba(232,197,71,0.12);
+      border-color: rgba(232,197,71,0.35);
+      color: var(--accent);
+    }
+
+    .btn-summer:hover, .btn-summer.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #000;
+    }
+
+    .btn-winter {
+      background: rgba(120,160,220,0.10);
+      border-color: rgba(120,160,220,0.3);
+      color: #7ba8d8;
+    }
+
+    .btn-winter:hover, .btn-winter.active {
+      background: #7ba8d8;
+      border-color: #7ba8d8;
+      color: #000;
+    }
+
+    /* ── SEASON CONTENT PANELS ── */
+    .season-panel {
+      display: none;
+      padding: 0 32px 32px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+      padding-top: 28px;
+    }
+
+    .season-panel.visible { display: block; }
+
+    .season-panel-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .season-badge {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      padding: 4px 14px;
+      border-radius: 4px;
+    }
+
+    .summer-badge { background: var(--accent); color: #000; }
+    .winter-badge { background: #7ba8d8; color: #000; }
+
+    /* ── BULLET LIST ── */
+    .insight-list {
+      list-style: none;
+      margin: 16px 0 24px;
+    }
+
+    .insight-list li {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .insight-list li:last-child { border-bottom: none; }
+
+    .insight-list .bullet-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      color: var(--accent);
+      line-height: 1;
+      min-width: 24px;
+    }
+
+    .winter-panel .insight-list .bullet-num { color: #7ba8d8; }
+
+    .insight-list .bullet-text { font-size: 15px; color: var(--text); }
+    .insight-list .bullet-text strong { color: var(--prose-strong); }
+
+    /* ── CLOSING SECTION ── */
+    .closing-card {
+      background: linear-gradient(135deg, var(--closing-bg-start) 0%, var(--closing-bg-end) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      margin-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .closing-card::before {
+      content: "!";
+      position: absolute;
+      right: 32px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 200px;
+      color: rgba(232,197,71,0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px 0 20px;
+      border-top: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── INLINE NOTE ── */
+    .inline-note {
+      background: rgba(232,197,71,0.07);
+      border: 1px solid rgba(232,197,71,0.18);
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-size: 14px;
+      color: rgba(232,197,71,0.75);
+      margin: 16px 0;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .stat-row { grid-template-columns: 1fr 1fr; }
+      .hero { height: 360px; }
+      .hero-text { padding: 24px; }
+      .hero-title { font-size: 46px; }
+      .season-buttons { flex-direction: column; align-items: center; }
+      .card, .season-panel { padding: 20px; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Final Assignment for the course</h1>
-    <p>Here we can add all the data and stuff</p>
-    <p>Link for final assignment github: https://github.com/suneman/socialdata2026/wiki/Final-Project</p>
+
+<div class="container">
+
+  <!-- DATE BAR -->
+  <div class="datebar">
+    <span id="date-display"></span>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <a href="#map-section" class="datebar-map-link">↓ Explore the map</a>
+      <div class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+        <div class="toggle-track">
+          <div class="toggle-thumb" id="toggle-icon">🌙</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-img-placeholder">
+      <!-- NYC skyline silhouette placeholder -->
+      <svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+        <rect width="900" height="480" fill="none"/>
+        <!-- simplified skyline shapes -->
+        <g fill="rgba(255,255,255,0.5)">
+          <rect x="60" y="280" width="18" height="140"/>
+          <rect x="85" y="260" width="22" height="160"/>
+          <rect x="112" y="240" width="16" height="180"/>
+          <rect x="133" y="220" width="28" height="200"/>
+          <rect x="166" y="200" width="12" height="220"/>
+          <rect x="183" y="170" width="24" height="250"/>
+          <rect x="212" y="190" width="18" height="230"/>
+          <rect x="235" y="210" width="30" height="210"/>
+          <rect x="270" y="180" width="14" height="240"/>
+          <rect x="289" y="155" width="20" height="265"/>
+          <rect x="314" y="170" width="26" height="250"/>
+          <rect x="345" y="200" width="16" height="220"/>
+          <rect x="366" y="185" width="22" height="235"/>
+          <rect x="393" y="160" width="18" height="260"/>
+          <rect x="416" y="140" width="30" height="280"/>
+          <rect x="451" y="165" width="20" height="255"/>
+          <rect x="476" y="190" width="14" height="230"/>
+          <rect x="495" y="175" width="26" height="245"/>
+          <rect x="526" y="155" width="22" height="265"/>
+          <rect x="553" y="170" width="16" height="250"/>
+          <rect x="574" y="200" width="28" height="220"/>
+          <rect x="607" y="220" width="18" height="200"/>
+          <rect x="630" y="240" width="14" height="180"/>
+          <rect x="649" y="260" width="22" height="160"/>
+          <rect x="676" y="280" width="18" height="140"/>
+          <rect x="699" y="300" width="16" height="120"/>
+          <rect x="720" y="270" width="20" height="150"/>
+          <rect x="745" y="250" width="26" height="170"/>
+          <rect x="776" y="230" width="14" height="190"/>
+          <rect x="795" y="210" width="22" height="210"/>
+          <rect x="822" y="240" width="18" height="180"/>
+          <rect x="845" y="260" width="30" height="160"/>
+        </g>
+        <!-- water line -->
+        <rect x="0" y="420" width="900" height="60" fill="rgba(255,255,255,0.08)" rx="0"/>
+      </svg>
+    </div>
+    <div class="hero-text">
+      <div class="hero-eyebrow">Data-Driven Travel Guide</div>
+      <div class="hero-title">A Guide for<br/><span>Foreign</span><br/>Drivers in<br/>New York</div>
+      <div class="hero-subtitle">Everything you need to know before you get behind the wheel in the city that never sleeps.</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="prose">
+    <h2>The Big Apple!</h2>
+    <p>Okay so you figured out you have time and money to visit the Big Apple! Congratulations! Now that you have the trip planned — how are you getting around?</p>
+    <p>Scared of the infamous subway, you might feel tempted to rent a car or hop into a taxi. But before you do, here are some things to be aware of…</p>
+  </div>
+
+  <div class="pullquote">
+    <p>Motor vehicle collisions are a big thing in New York — and if you look at it quickly, it seems to happen without rhyme or reason.</p>
+  </div>
+
+  <!-- TOTAL COLLISIONS FIGURE -->
+  <div class="figure-placeholder tall">
+    <span class="fig-icon">—</span>
+    <span>Figure: Total vehicle collisions in New York</span>
+  </div>
+  <p class="figure-caption">Total vehicle collisions recorded in New York City</p>
+
+  <div class="prose">
+    <p>You might think it is as simple as <strong>avoiding driving in a snowstorm</strong> — or avoiding driving when traffic volume is at its highest. But this is not enough!</p>
+    <p>We are here to equip you with the <em>season-proof New York traffic hacks</em> so that you know what to avoid and when.</p>
+  </div>
+
+  <!-- STAT STRIP -->
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-value">[ # ]</div>
+      <div class="stat-label">Total collisions (year)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">[ # ]</div>
+      <div class="stat-label">Peak day / snowstorm</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">[ # ]</div>
+      <div class="stat-label">Injuries recorded</div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- SEASON SELECTOR -->
+  <div class="season-section">
+    <div class="season-question">
+      <h2>What time of the year are you travelling?</h2>
+      <p>Your answer changes what you need to watch out for — pick your season:</p>
+      <div class="season-buttons">
+        <button class="btn-season btn-summer" onclick="selectSeason('summer')">Summer</button>
+        <button class="btn-season btn-winter" onclick="selectSeason('winter')">Winter</button>
+      </div>
+    </div>
+
+    <!-- SUMMER PANEL -->
+    <div class="season-panel" id="panel-summer">
+      <div class="season-panel-header">
+        <span class="season-badge summer-badge">SUMMER</span>
+        <h3>Cool cool cool cool — not exactly.</h3>
+      </div>
+
+      <div class="prose">
+        <p>You prefer sweating around the big city for your well-deserved summer break? Well, bad news buddy! Apart from it being really hot in NYC in the summer, it is also in the summer months that <strong>most vehicle collisions occur</strong>.</p>
+        <p>Take a look at this graph — June and May are peak months for vehicle collisions. What else happens in June?</p>
+      </div>
+
+      <div class="figure-placeholder medium">
+        <span class="fig-icon">—</span>
+        <span>Figure: Collisions by month — summer peak</span>
+      </div>
+      <p class="figure-caption">Monthly collision counts — note the June/May peak</p>
+
+      <h3>Why summer spikes</h3>
+      <ul class="insight-list">
+        <li>
+          <span class="bullet-num">01</span>
+          <span class="bullet-text"><strong>Surge in tourism:</strong> You will probably not be the only foreigner on the street. Just like you, many opt for visiting New York in the summertime — more unfamiliar drivers, more chaos.</span>
+        </li>
+        <li>
+          <span class="bullet-num">02</span>
+          <span class="bullet-text"><strong>Younger drivers:</strong> Schools out. University students finish their exams mid-May and return in September. Young drivers are overrepresented in collision statistics — and more so during summer months.</span>
+        </li>
+        <li>
+          <span class="bullet-num">03</span>
+          <span class="bullet-text"><strong>Borough & severity breakdown:</strong> [Your content here — e.g. Manhattan vs. outer boroughs, speed limits, fatal vs. property damage accidents.]</span>
+        </li>
+      </ul>
+
+      <div class="figure-placeholder medium">
+        <span class="fig-icon">—</span>
+        <span>Figure: Collisions by borough / severity (summer)</span>
+      </div>
+      <p class="figure-caption">Where and how severe summer collisions are distributed</p>
+
+      <div class="inline-note">
+        In Manhattan, where traffic speed limits are low and traffic moves slowly, fatal accidents are rare. More dangerous conditions are found where speed limits are higher — outer boroughs and highway approaches.
+      </div>
+    </div>
+
+    <!-- WINTER PANEL -->
+    <div class="season-panel winter-panel" id="panel-winter">
+      <div class="season-panel-header">
+        <span class="season-badge winter-badge">WINTER</span>
+        <h3>Cold roads, cold stats — but not safer.</h3>
+      </div>
+
+      <div class="prose">
+        <p>Visiting in winter? The good news: overall collision volume is lower than summer. The bad news: <strong>severity goes up</strong> — and the conditions are far less forgiving.</p>
+      </div>
+
+      <div class="figure-placeholder medium">
+        <span class="fig-icon">—</span>
+        <span>Figure: Winter collision trends / snowstorm peaks</span>
+      </div>
+      <p class="figure-caption">Collision frequency during winter months — storm day spikes</p>
+
+      <h3>What you need to know for winter</h3>
+      <ul class="insight-list">
+        <li>
+          <span class="bullet-num">01</span>
+          <span class="bullet-text"><strong>Weather impact:</strong> [Insert snowstorm correlation data — peak collision days vs. storm days.]</span>
+        </li>
+        <li>
+          <span class="bullet-num">02</span>
+          <span class="bullet-text"><strong>Top three causes:</strong> [Insert top 3 contributing factors for winter collisions in NYC.]</span>
+        </li>
+        <li>
+          <span class="bullet-num">03</span>
+          <span class="bullet-text"><strong>Most dangerous borough:</strong> [Insert which borough sees the most severe winter incidents and why.]</span>
+        </li>
+        <li>
+          <span class="bullet-num">04</span>
+          <span class="bullet-text"><strong>Vehicle types & severity:</strong> [Insert data on which vehicle types are most involved — more property-only incidents, fewer fatalities, etc.]</span>
+        </li>
+      </ul>
+
+      <div class="figure-placeholder medium">
+        <span class="fig-icon">—</span>
+        <span>Figure: Vehicle types & collision severity (winter)</span>
+      </div>
+      <p class="figure-caption">Breakdown by vehicle type and outcome during winter months</p>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- CLOSING -->
+  <div class="closing-card">
+    <h2>The bottom line</h2>
+    <div class="prose">
+      <p>In general — avoid this and that. And remember: vehicle collisions happen without too much rhyme or reason. Even though there are seasonal patterns, there are so many incidents every year. Even though they spike in sync with snowstorms or during summer break, this does not mean you can relax on a regular Wednesday at 1 in the afternoon just because everyone around you looks 45.</p>
+      <p>What this data really shows is that <strong>vehicle collisions happen all the time</strong>, for reason or no reason at all. There are not many spots in New York where there has <em>not</em> been a vehicle collision in the past 20 years.</p>
+      <p>So if you are driving in New York: make sure you have insurance, stay updated on traffic rules — right of way, lane changes — and <strong>most importantly, do not get distracted by the towering skyscrapers around you.</strong></p>
+    </div>
+  </div>
+
+  <!-- MAP SECTION -->
+  <div class="map-section" id="map-section">
+    <h2>Dive into the map</h2>
+    <div class="prose">
+      <p>Explore why and where accidents happen across the five boroughs. Zoom in, filter by severity, and see which streets carry the most risk.</p>
+    </div>
+
+    <div class="figure-placeholder map">
+      <span class="fig-icon">—</span>
+      <span>Interactive map — NYC vehicle collisions</span>
+    </div>
+    <p class="figure-caption">Explore collision data across New York City's five boroughs</p>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>Data: NYC Open Data — Motor Vehicle Collisions · Compiled May 2026</p>
+</footer>
+
+<script>
+  // Date display
+  const d = new Date();
+  const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById('date-display').textContent = d.toLocaleDateString('en-US', opts).toUpperCase();
+
+  // Theme toggle
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isLight = html.getAttribute('data-theme') === 'light';
+    html.setAttribute('data-theme', isLight ? 'dark' : 'light');
+    document.getElementById('toggle-icon').textContent = isLight ? '🌙' : '☀️';
+    localStorage.setItem('theme', isLight ? 'dark' : 'light');
+  }
+
+  // Restore saved preference
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    document.getElementById('toggle-icon').textContent = '☀️';
+  }
+
+  // Season toggle
+  function selectSeason(season) {
+    document.querySelectorAll('.season-panel').forEach(p => p.classList.remove('visible'));
+    document.querySelectorAll('.btn-season').forEach(b => b.classList.remove('active'));
+
+    document.getElementById('panel-' + season).classList.add('visible');
+    document.querySelector('.btn-' + season).classList.add('active');
+
+    // Smooth scroll into view
+    setTimeout(() => {
+      document.getElementById('panel-' + season).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 60);
+  }
+</script>
+
 </body>
 </html>
-<p> <b>Data story idea 1: 'headline'</b>
-<b>What is the project idea?</b>
-The idea is to explore data on motor vehicle crashes in NYC in the time period 2014-present. We will explore the temporal patterns, 
-location patterns and historic patterns. Has the traffic safety in NYC increased or decreased since 2014? Are there specific times
-and locations where motor crashes happen more often? Why? What type of traffic-travellers are most usually killed in these accidents?
-Pedestrians, cyclists or motorists? 
-    
-<b>Which datasets do you need to explore the idea?</b>
-Data from NYC 2014-present. 2.25M rows, 29 columns. 
-https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95/about_data
-    
-<b>Why is it interesting?</b>
-It is interesting because patterns might reveal hot spot locations for car crashes. By localizing such hot spots it would be possible 
-to further investigate why the hotspots are located where they are and possibly come up with a solution to make a certain hotspot less
-prone to car crashes, fx better traffic lights, speed bumps, etc. Regarding the historic development it is interesting to see if the
-same locations have been prone to car crashes through the history and if so (or not so), why? Can something be done about this?
-    
-<b>A mock up of the visualization that you wish to build. (Anything is fine here. Pen and paper, 
-MS Paint, Inkscape, D3, LLMs, anything is OK).</b>
-Historical pattern - historic trend line investigating number of motor vehicle colissions and/or number of type 
-of traffic-traveller injured or dead
-Temporal pattern - boxplot..? Choropleth Map 
-Location/borough pattern - heat map
-Type of traffic-traveller injured or dead - bar chart 
-    
-Make sure you answer the questions
-What genre is it? (for Genres, see section 4.3 of the Segel and Heer paper)
-Why is that genre right for telling the story you want to communicate with the data
-A walk-through of your preliminary data-analysis, addressing
-What is the total size of your data? (MB, number of rows, number of variables, etc)
-What are other properties? (What is the date range? Is is it geo-data?, then a quick plot of locations, etc.)
-Show the fundamental distributions of the data (similar to the work we did on SF crime data)
-</p>
