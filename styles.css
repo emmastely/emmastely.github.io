@@ -318,14 +318,14 @@ h3 {
 .figure-placeholder.map { height: 420px; }
 
 .figure-caption {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
     color: var(--text-muted);
     font-style: italic;
-    text-align: center;
+    text-align: left;
     margin-bottom: 32px;
     margin-top: -12px;
 }
-
 /* ── STAT CARDS ── */
 .stat-row {
     display: grid;
