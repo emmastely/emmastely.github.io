@@ -50,14 +50,14 @@
   </div>
 
   <!-- TOTAL COLLISIONS FIGURE -->
-  <div class="figure-placeholder tall">
+  <div class="figure-placeholder" style="height:510px; padding:0;">
     <iframe 
       src="https://emmastely.github.io/visualizations/final_assignment/heatmap_crashes.html" 
       width="100%" 
-      height="500" 
+      height="100%"
+      style="border:none; display:block;"
       frameborder="0">
     </iframe>
-    <span>Figure: Total vehicle collisions in New York</span>
   </div>
   <p class="figure-caption">Total vehicle collisions recorded in New York City</p>
 
@@ -67,11 +67,11 @@
   </div>
 
   <!--ALL COLLISIONS SPATIAL DISTRIBUTION -->
-  <div class="figure-placeholder tall">
+  <div class="figure-placeholder" style="height:510px; padding:0;">
     <iframe 
       src="https://emmastely.github.io/visualizations/final_assignment/crashes_over_NYC.html" 
       width="100%" 
-      height="500" 
+      height="100%" 
       frameborder="0">
     </iframe>
     <span>Figure: Spatial distribution showing all incidents over the past 20 years</span>
@@ -83,23 +83,6 @@
     <p>We are here to equip you with the <em>season-proof New York traffic hacks</em> so that you know what to avoid and when.</p>
   </div>
 
-  <!-- STAT STRIP -->
-  <div class="stat-row">
-    <div class="stat-card">
-      <div class="stat-value">[ # ]</div>
-      <div class="stat-label">Total collisions (year)</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value">[ # ]</div>
-      <div class="stat-label">Peak day / snowstorm</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value">[ # ]</div>
-      <div class="stat-label">Injuries recorded</div>
-    </div>
-  </div>
-
-  <hr class="divider" />
 
   <!-- SEASON SELECTOR -->
   <div class="season-section">
@@ -323,23 +306,19 @@
           congested nature of NYC traffic. So, if you decide to drive in NYC, keep your eyes on the road and remember that other drivers might not do the same thing. 
           Keep a safe distance to other vehicles, and be especially causious at intersections or when changes lanes. Overall, the data suggests that collisions in NYC are often caused by several risky driving behaviors occurring 
           at the same time rather than by a single mistake. 
-        <img 
+</p>
+      <img 
           src="images/final_assignment/correlation_heatmap.png"
-          width="100%" 
-          frameborder="0">
-        </img>
-      </div>
-      <p class="figure-caption">Correlation matrix of top contributing factors. The R2 values are 
+          width="100%">
+      <p class="figure-caption">
+        Correlation matrix of top contributing factors. The R2 values are 
         generally high for all comparisons, which indicates that contributing factors to car collissions 
         have a high change of being correlated. The R2-value quantifies the proportion of variation in the dependent
         variable that can be explained by the independent variable. In other words, a R2-value of 95% means that 95%
-        og the data variation in the dependent variable can be exlained by the independent variable 
-              <cite
-      ><a href="//https://en.wikipedia.org/wiki/Coefficient_of_determination"
-        >(Coefficient of Determination, n.d.).</a
-      ></cite
-          >
+        of the data variation in the dependent variable can be explained by the independent variable 
+        <cite><a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">(Coefficient of Determination, n.d.).</a></cite>
       </p>
+    </div><!-- /season-panel winter-panel -->
 
   <hr class="divider" />
 
