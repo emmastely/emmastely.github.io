@@ -55,38 +55,8 @@
     </p>
   </div>
 
-  <!-- TOTAL COLLISIONS FIGURE -->
-  <div class="figure-placeholder" style="margin-bottom:0; overflow:hidden; height:387px;">
-    <iframe
-      src="https://emmastely.github.io/visualizations/final_assignment/heatmap_crashes.html"
-      width="100%"
-      height="500"
-      style="border:none; display:block;"
-      frameborder="0">
-    </iframe>
-  </div>
-  <p class="figure-caption">The visualization above allows us to see patterns over the time period 2013-2022. Although the volume of crashes changes each year,
-    and sharply declines in march 2020, as Covid-19 hits New York City, we can see that the general pattern of crashes is pretty much the same across all years. We can see that there are more crashes during the summer months and fewer crashes during the winter months. 
-    Post Covid-19, the number of vehicle collisions seems to remain lower than pre-pandemic levels, however the pattern of May and June, as well as October showing an increase of incidents resumes in 2021. 
-  </p>
+<hr style="border-top: 2px dashed #8c8b8b;" />
 
-  <div class="prose">
-    <p> Make connection to tourism in summer leading to next visualization</p>
-  </div>
-
-  <!-- TOURISM FIGURE -->
-  <div class="figure-placeholder" style="margin-bottom:0; overflow:hidden; height:387px;">
-    <iframe
-      src="https://emmastely.github.io/visualizations/final_assignment/heatmap_tourism.html"
-      width="100%"
-      height="500"
-      style="border:none; display:block;"
-      frameborder="0">
-    </iframe>
-  </div>
-  <p class="figure-caption">The visualization above shows the number of inbound flight passengers to New York airpors LaGuardia and JFK. Although also tourism peaks in summer
-    and in October, the pattern is different from the vehicle collision pattern. The number of incoming travelers peaks in July and August. 
-  </p>
 
   <div class="prose">
     <p> Looking at all the motor vehicle collisions reported in New York City what we see is a sea of incidents. Looking at it quickly, accidents seems to happen without rhyme or reason and it is almost virtually impossible to find an intersection anywhere across the city without at least one incident.</p>
@@ -105,6 +75,65 @@
   </div>
   <p class="figure-caption">The figure shows all recorded vehicle collissions in New York city from 2013 and 2022. What this geospatial representation primarily shows is that although some areas appear to have more collisions, the dots are still spread across the entire city covering most streets and intersections.</p>
 
+
+
+  <div class="prose">
+    <p> Now, how common are car collisions in New York City? 
+      So to give an idea of the scale of the problem, we can start by breaking it down to the number of incidents reported each months between 2013 and 2022.
+      By breaking the volume down over time, we can start to see patterns and trends across seasons or years.
+    </p>
+  </div>
+
+
+  <!-- TOTAL COLLISIONS FIGURE -->
+  <div class="figure-placeholder" style="margin-bottom:0; overflow:hidden; height:387px;">
+    <iframe
+      src="https://emmastely.github.io/visualizations/final_assignment/heatmap_crashes.html"
+      width="100%"
+      height="500"
+      style="border:none; display:block;"
+      frameborder="0">
+    </iframe>
+  </div>
+  <p class="figure-caption">The heatmap above shows the number of vehicle collisions reported in New York city over the time period 2013-2022.
+    By comparing the color of the corresponding block to the legend on the right, we can see how many incidents were reported in a given month and year and if hovering on it, you find the exact number
+    When looking how the color intensity varies, we can see patterns. Although the volume of crashes changes each year,
+    and sharply declines in march 2020, as Covid-19 hits New York City, we can see that the general pattern of crashes is pretty much the same across all years. We can see that there are more crashes during the summer months and fewer crashes during the winter months. 
+    Post Covid-19, the number of vehicle collisions seems to remain lower than pre-pandemic levels, however the pattern of May and June, as well as October showing an increase of incidents resumes in 2021. 
+  </p>
+
+  <div class="prose">
+<p>
+From the heatmap, we see that the number of vehicle collisions peaks in the summer months, around May and June. The period between Labor Day and Memorial Day is often called <i>“the 100 deadliest days for teen drivers”</i>, and some sources blame it on the increased tourism during the summer months. Increased travel, more inexperienced drivers, and heavier traffic are all factors commonly linked to the seasonal rise in crashes 
+(<a href="https://www.sweeneyattorneys.com/blog/2019/may/4-reasons-more-crashes-occur-during-the-summer/" target="_blank">Sweeney, Sweeney &amp; Sweeney, 2019</a>).
+</p>
+
+<p>
+Is that really the case? Should you be peeking around into the other cars to determine whether the people behind or in front of you might not, in fact, be locals?
+</p>
+
+<p>
+To determine the flow of tourism, we can analyze data from incoming passengers at New York airports and put it into a similar heatmap. This will allow us to see whether the patterns look similar.
+</p>
+
+  </div>
+
+  <!-- TOURISM FIGURE -->
+  <div class="figure-placeholder" style="margin-bottom:0; overflow:hidden; height:387px;">
+    <iframe
+      src="https://emmastely.github.io/visualizations/final_assignment/heatmap_tourism.html"
+      width="100%"
+      height="500"
+      style="border:none; display:block;"
+      frameborder="0">
+    </iframe>
+  </div>
+  <p class="figure-caption">The visualization above shows the number of inbound flight passengers to New York airpors LaGuardia and JFK. Although also tourism peaks in summer
+    and in October, the pattern is different from the vehicle collision pattern. The number of incoming travelers peaks in July and August. 
+  </p>
+
+  <div class="prose">Judging by the patterns and comparing the peak in airport arrrivals and collision reports, the peaks do not line up, meaning there might be more to it. It could be that the increase in tourism does have an effect, but there is no clear correlation.</p>
+  </div>
 
   <div class="prose">
     <p>You might think it is as simple as <strong>avoiding driving in a snowstorm</strong> — or avoiding driving when traffic volume is at its highest. But this is not enough!</p>
