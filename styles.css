@@ -148,6 +148,12 @@ html[data-theme="light"] .toggle-thumb {
     opacity: 0.85;
     transform: translateY(-1px);
 }
+.map-figure {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 /* ── HERO ── */
 .hero {
